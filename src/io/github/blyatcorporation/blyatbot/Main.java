@@ -113,6 +113,17 @@ public class Main implements Runnable, EventListener{
 				return;
 			}
 			
+			if(cmd[1].equalsIgnoreCase("SOS")) {
+				channel.sendMessage(sender.getAsMention() + " Confirmer votre position avec vodk here :").queue();
+				return;
+			}
+			
+			if(cmd[1].equalsIgnoreCase("here")) {
+				channel.sendMessage(sender.getAsMention() + "https://www.slate.fr/sites/default/files/giphy%20(55).gif").queue();
+				return;
+			
+			}
+			
 			channel.sendMessage("Cette commande n'existe pas !").queue();
 			
 			
