@@ -106,9 +106,15 @@ public class Main implements Runnable, EventListener{
 			if(cmd[1].equalsIgnoreCase("urss")) {
 				channel.sendMessage(sender.getAsMention() + " L'hymne de la mère patrie : https://www.youtube.com/watch?v=Rm6q_3WGy9M").queue();
 				return;
-			}		
+			}	
+			
+			if(cmd[1].equalsIgnoreCase("Bonjour")) {
+				channel.sendMessage(sender.getAsMention() + " привет собрат!").queue();
+				return;
+			}
 			
 			channel.sendMessage("Cette commande n'existe pas !").queue();
+			
 			
 		}
 		return;
