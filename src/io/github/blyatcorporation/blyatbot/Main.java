@@ -129,6 +129,16 @@ public class Main implements Runnable, EventListener{
 				return;
 			}
 			
+			if(cmd[1].equalsIgnoreCase("answer")) {
+				channel.sendMessage(sender.getAsMention() + " OUI + NON sqrt(2) VRAI").queue();
+				return;
+			}
+			
+			if(cmd[1].equalsIgnoreCase("CallKGB")) {
+				channel.sendMessage(sender.getAsMention() + " Ca va pas être possible.").queue();
+				return;
+			}
+			
 			channel.sendMessage("Cette commande n'existe pas !").queue();
 			
 			
