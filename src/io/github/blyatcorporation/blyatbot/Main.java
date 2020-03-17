@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 import javax.security.auth.login.LoginException;
 
-import com.sun.jdi.event.Event;
-
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.RateLimitedException;
@@ -26,7 +26,7 @@ public class Main implements Runnable, EventListener{
 	public Main() throws LoginException, IllegalArgumentException, RateLimitedException {
 		jda = new JDABuilder(AccountType.BOT).setToken(token).build();
 		jda.addEventListener(this);
-		System.out.println("[Narrabot] Bot connect� avec succ�s !");
+		System.out.println("[BlyatBot] Bot connecté avec succès !");
 	}
 	
 	public JDA getJda() {
@@ -46,8 +46,7 @@ public class Main implements Runnable, EventListener{
 		
 		while(running) {		
 			if(sc.hasNextLine()) onConsoleCommand(sc.nextLine()); 
-		}
-			
+		}	
 		System.out.println("[Narrabot] Arret du bot en cours ...");
 		jda.shutdownNow();
 		System.out.println("[Narrabot] Bot stopp�");
@@ -56,20 +55,20 @@ public class Main implements Runnable, EventListener{
 
 	public static void main(String[] args) throws IllegalArgumentException, RateLimitedException{
 		
-		System.out.println("[Narrabot] D�marrage du bot ...");
+		System.out.println("[BlyatBot] Démarrage du bot ...");
 		
 		if (args.length < 1) {
-	        System.out.println("[Narrabot] [ERROR] Veuillez indiquer le token du bot");
+	        System.out.println("[BlyatBot] [ERROR] Veuillez indiquer le token du bot");
 	        System.exit(0);
 	    }
 		token = args[0];
-		System.out.println("[Narrabot] Connection ...");
+		System.out.println("[BlyatBot] Connection ...");
 		try {
 			Main bot = new Main();
-			new Thread(null, bot, "bot");
+			new Thread(bot, "bot").start();
 		} catch (LoginException e) {
 			e.printStackTrace();
-			System.out.println("[Narrabot] [ERROR] Erreur lors de la connection, veuillez v�rifier le token et votre connection internet.");
+			System.out.println("[BlyatBot] [ERROR] Erreur lors de la connection, veuillez vérifier le token et votre connection internet.");
 		}
 		
 		
@@ -84,6 +83,7 @@ public class Main implements Runnable, EventListener{
 		if(cmd.equalsIgnoreCase("stop")) {
 			running = false;
 		}
+		return;
 	}
 
 	@Override
@@ -96,9 +96,20 @@ public class Main implements Runnable, EventListener{
 		
 		String msg = event.getMessage().getContentRaw();
 		
-		if(msg.startsWith(prefix)) {
+		if(msg.startsWith(prefix)) { //Le message commence par le préfix -> commande pour le bot
+			
+			MessageChannel channel = event.getChannel();
+			Member sender = event.getMember();
+			
 			String[] cmd = msg.split(" ");
-			System.out.println(cmd);
+			
+			if(cmd[1].equalsIgnoreCase("urss")) {
+				channel.sendMessage(sender.getAsMention() + " L'hymne de la mère patrie : https://www.youtube.com/watch?v=Rm6q_3WGy9M").queue();
+				return;
+			}		
+			
+			channel.sendMessage("Cette commande n'existe pas !").queue();
+			
 		}
 		return;
 		
