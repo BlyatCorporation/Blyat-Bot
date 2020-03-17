@@ -124,6 +124,11 @@ public class Main implements Runnable, EventListener{
 			
 			}
 			
+			if(cmd[1].equalsIgnoreCase("OpenPlaneDoor")) {
+				channel.sendMessage(sender.getAsMention() + "Nan on avait pas dit le porte avion ...").queue();
+				return;
+			}
+			
 			channel.sendMessage("Cette commande n'existe pas !").queue();
 			
 			
