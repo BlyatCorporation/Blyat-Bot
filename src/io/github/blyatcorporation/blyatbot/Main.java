@@ -139,6 +139,11 @@ public class Main implements Runnable, EventListener{
 				return;
 			}
 			
+			if(cmd[1].equalsIgnoreCase("Chaharaoui")) {
+				channel.sendMessage(sender.getAsMention() + " Exercice 3!").queue();
+				return;
+			}
+			
 			channel.sendMessage("Cette commande n'existe pas !").queue();
 			
 			
